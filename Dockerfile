@@ -1,9 +1,21 @@
-FROM centos:centos6
+FROM phusion/baseimage:0.9.15
 MAINTAINER Doug Smith <info@laboratoryb.org>
-ENV build_date 2014-10-02
+# Set correct environment variables.
+ENV HOME /root
+ENV DEBIAN_FRONTEND noninteractive
 
-RUN yum update -y
-RUN yum install kernel-headers gcc gcc-c++ cpp ncurses ncurses-devel libxml2 libxml2-devel sqlite sqlite-devel openssl-devel newt-devel kernel-devel libuuid-devel net-snmp-devel xinetd tar -y
+# Use baseimage-docker's init system.
+CMD ["/sbin/my_init"]
+
+#Change uid & gid to match Unraid
+#RUN usermod -u 99 nobody && \
+#    usermod -g 100 nobody && \
+#    usermod -d /home nobody && \
+#    chown -R nobody:users /home
+
+RUN apt-get update -y
+
+RUN apt-get install build-essential wget libssl-dev libncurses5-dev libnewt-dev  libxml2-dev linux-headers-$(uname -r) libsqlite3-dev uuid-dev tar -y
 
 ENV AUTOBUILD_UNIXTIME 1418234402
 
@@ -17,7 +29,7 @@ RUN tar -xzf /tmp/asterisk.tar.gz -C /tmp/asterisk --strip-components=1
 WORKDIR /tmp/asterisk
 
 # make asterisk.
-ENV rebuild_date 2014-10-07
+ENV rebuild_date 2015-01-29
 # Configure
 RUN ./configure --libdir=/usr/lib64 1> /dev/null
 # Remove the native build option
