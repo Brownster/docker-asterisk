@@ -4,12 +4,6 @@
 NAME_ASTERISK=asterisk
 NAME_FASTAGI=fastagi
 
-# Do some cleanup.
-echo "Kill all containers"
-docker kill $(docker ps -a -q)
-echo "Removing all containers"
-docker rm $(docker ps -a -q)
-
 # Run the fastagi container.
 docker run \
 	-p 4573:4573 \
