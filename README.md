@@ -1,5 +1,21 @@
 # docker-asterisk
 
+All work done by dougbtv - just my attempts to bring it in line with unraid requirements:
+
+http://lime-technology.com/forum/index.php?topic=33922.0
+
+still on going it builds OK but need to do something around running it as nouser:
+
+#Change uid & gid to match Unraid
+RUN usermod -u 99 nobody && \
+    usermod -g 100 nobody && \
+    usermod -d /home nobody && \
+    chown -R nobody:users /home
+    
+like in other containers made for unraid.
+
+Start of Original Readme:
+
 A set of Dockerfiles for running asterisk (and a FastAGI, one for PHP as it stands)
 
 Also checkout my blog article @ [dougbtv.com](http://dougbtv.com/2014/10/02/docker-and-asterisk/).
