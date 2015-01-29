@@ -4,9 +4,14 @@ All work done by dougbtv - just my attempts to bring it in line with unraid requ
 
 http://lime-technology.com/forum/index.php?topic=33922.0
 
-still on going it builds OK but need to do something around running it as nouser:
+still on going it builds OK 
+docker run -p 4573:4573 --name fastagi -d -t dougbtv/fastagi
+docker run --name asterisk --net=host -d -t brownster/unraid-asterisk-docker
 
-#Change uid & gid to match Unraid
+
+but need to do something around running it as nouser:
+
+something to match unraid
 RUN usermod -u 99 nobody && \
     usermod -g 100 nobody && \
     usermod -d /home nobody && \
