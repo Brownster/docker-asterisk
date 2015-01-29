@@ -20,10 +20,10 @@ docker run \
 docker run \
     --name $NAME_ASTERISK \
     --net=host \
-    -d -t dougbtv/asterisk
+    -d -t brownster/unraid-asterisk-docker
 
 # -----------------------------
 # Some helpful debug stuff...
-# docker run --name $NAME_ASTERISK --net=host -d -t dougbtv/asterisk
+# docker run --name $NAME_ASTERISK --net=host -d -t brownster/unraid-asterisk-docker
 # For testing use:
-# docker run --name $NAME_ASTERISK --net=host -i -t dougbtv/asterisk bin/bash
+# docker run --name $NAME_ASTERISK --net=host -i -t brownster/unraid-asterisk-docker bin/bash
