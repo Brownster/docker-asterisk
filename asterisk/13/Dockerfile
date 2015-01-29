@@ -1,12 +1,11 @@
-FROM centos:centos6
+FROM phusion/baseimage:0.9.15
 MAINTAINER Doug Smith <info@laboratoryb.org>
 ENV build_date 2014-10-24
 
-RUN yum update -y
-RUN yum install kernel-headers gcc gcc-c++ cpp ncurses ncurses-devel libxml2 libxml2-devel sqlite sqlite-devel openssl-devel newt-devel kernel-devel libuuid-devel net-snmp-devel xinetd tar -y
+RUN apt-get update -y
+RUN apt-get install inux-headers-$(uname -r) gcc gcc-c++ cpp ncurses libncurses5-dev libxml2 libxml2-devel sqlite libsqlite3-dev libssl-dev newt-devel kernel-devel libuuid-devel net-snmp-devel xinetd tar bzip2 epel-release jansson-devel -y
 
 # Get pj project
-RUN yum install -y bzip2
 RUN mkdir /tmp/pjproject
 RUN curl -sf -o /tmp/pjproject.tar.bz2 -L http://www.pjsip.org/release/2.3/pjproject-2.3.tar.bz2
 RUN tar -xjvf /tmp/pjproject.tar.bz2 -C /tmp/pjproject --strip-components=1
@@ -30,10 +29,6 @@ RUN curl -sf -o /tmp/asterisk.tar.gz -L http://downloads.asterisk.org/pub/teleph
 RUN mkdir /tmp/asterisk
 RUN tar -xzf /tmp/asterisk.tar.gz -C /tmp/asterisk --strip-components=1
 WORKDIR /tmp/asterisk
-
-# Extra deps.
-RUN yum install -y epel-release
-RUN yum install -y jansson-devel
 
 # make asterisk.
 ENV rebuild_date 2014-10-07
